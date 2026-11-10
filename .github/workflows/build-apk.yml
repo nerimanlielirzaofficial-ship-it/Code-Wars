@@ -2,7 +2,7 @@ name: CODE WARS APK Build
 
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -17,20 +17,14 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-
-      - name: Android SDK hazırla
-        uses: android-actions/setup-android@v3
+          java-version: 17
 
       - name: Gradle quraşdır
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+          gradle-version: 8.9
 
-      - name: Android SDK paketləri
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
-      - name: APK hazırla
+      - name: APK yarat
         run: gradle assembleDebug
 
       - name: APK faylını saxla
